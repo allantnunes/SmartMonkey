@@ -1,0 +1,42 @@
+﻿@model IEnumerable<SmartMonkey.Instituicao>
+
+@{
+    ViewBag.Title = "Lista de Instituições";
+}
+
+    <h2>Lista de Instituições</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.razaoSocial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nomeFantasia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cnpj)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.razaoSocial)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nomeFantasia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cnpj)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.idInstituicao }) |
+            @Html.ActionLink("Detalhes", "Details", new { id=item.idInstituicao }) |
+            @Html.ActionLink("Deletar", "Delete", new { id=item.idInstituicao })
+        </td>
+    </tr>
+}
+
+</table>

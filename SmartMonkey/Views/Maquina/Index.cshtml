@@ -1,0 +1,54 @@
+﻿@model IEnumerable<SmartMonkey.Maquina>
+
+@{
+    ViewBag.Title = "Lista de Máquinas";
+}
+
+<h2>Lista de Máquinas</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.modelo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.processador)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.memoriaRam)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.discoRigido)
+        </th>
+        <th>
+           Instituição
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.modelo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.processador)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.memoriaRam)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.discoRigido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Instituicao.nomeFantasia)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.idMaquina }) |
+            @Html.ActionLink("Detalhes", "Details", new { id=item.idMaquina }) |
+            @Html.ActionLink("Deletar", "Delete", new { id=item.idMaquina })
+        </td>
+    </tr>
+}
+
+</table>

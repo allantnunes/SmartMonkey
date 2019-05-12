@@ -1,0 +1,59 @@
+﻿@model IEnumerable<SmartMonkey.Usuario>
+
+@{
+    ViewBag.Title = "Lista de Usuários";
+}
+
+    <h2>Lista de Usuários</h2>
+
+<!--
+<p>
+    @Html.ActionLink("Cadastrar novo usuário", "Create")
+</p>-->
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cpf)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cargo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ativo)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cpf)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cargo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ativo)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.idUsuario }) |
+                @Html.ActionLink("Detalhes", "Details", new { id = item.idUsuario }) |
+                @Html.ActionLink("Deletar", "Delete", new { id = item.idUsuario })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,88 @@
+﻿@model SmartMonkey.Maquina
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Maquina</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.modelo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.modelo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.processador)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.processador)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.memoriaRam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.memoriaRam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.discoRigido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.discoRigido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.delimitCpu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.delimitCpu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.delimitRam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.delimitRam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.delimitHd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.delimitHd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Instituicao.razaoSocial)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Instituicao.razaoSocial)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

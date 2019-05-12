@@ -1,0 +1,82 @@
+﻿@model SmartMonkey.Maquina
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Maquina</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.modelo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.modelo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.processador)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.processador)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.memoriaRam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.memoriaRam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.discoRigido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.discoRigido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.delimitCpu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.delimitCpu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.delimitRam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.delimitRam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.delimitHd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.delimitHd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Instituicao.razaoSocial)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Instituicao.razaoSocial)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idMaquina }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
