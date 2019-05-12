@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelosStoreContainer" CdmEntityContainer="Entidades">
+    <EntitySetMapping Name="Instituicao">
+      <EntityTypeMapping TypeName="Modelos.Instituicao">
+        <MappingFragment StoreEntitySet="Instituicao">
+          <ScalarProperty Name="idInstituicao" ColumnName="idInstituicao" />
+          <ScalarProperty Name="razaoSocial" ColumnName="razaoSocial" />
+          <ScalarProperty Name="nomeFantasia" ColumnName="nomeFantasia" />
+          <ScalarProperty Name="cnpj" ColumnName="cnpj" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Maquina">
+      <EntityTypeMapping TypeName="Modelos.Maquina">
+        <MappingFragment StoreEntitySet="Maquina">
+          <ScalarProperty Name="idMaquina" ColumnName="idMaquina" />
+          <ScalarProperty Name="modelo" ColumnName="modelo" />
+          <ScalarProperty Name="processador" ColumnName="processador" />
+          <ScalarProperty Name="memoriaRam" ColumnName="memoriaRam" />
+          <ScalarProperty Name="discoRigido" ColumnName="discoRigido" />
+          <ScalarProperty Name="delimitCpu" ColumnName="delimitCpu" />
+          <ScalarProperty Name="delimitRam" ColumnName="delimitRam" />
+          <ScalarProperty Name="delimitHd" ColumnName="delimitHd" />
+          <ScalarProperty Name="idInstituicao" ColumnName="idInstituicao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuario">
+      <EntityTypeMapping TypeName="Modelos.Usuario">
+        <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="cpf" ColumnName="cpf" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="login" ColumnName="login" />
+          <ScalarProperty Name="senha" ColumnName="senha" />
+          <ScalarProperty Name="cargo" ColumnName="cargo" />
+          <ScalarProperty Name="ativo" ColumnName="ativo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

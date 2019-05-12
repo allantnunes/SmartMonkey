@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Modelos.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Instituicao">
+    <Key>
+      <PropertyRef Name="idInstituicao" />
+    </Key>
+    <Property Name="idInstituicao" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="razaoSocial" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="nomeFantasia" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="cnpj" Type="varchar" MaxLength="18" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Maquina">
+    <Key>
+      <PropertyRef Name="idMaquina" />
+    </Key>
+    <Property Name="idMaquina" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="modelo" Type="varchar" MaxLength="90" Nullable="false" />
+    <Property Name="processador" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="memoriaRam" Type="int" Nullable="false" />
+    <Property Name="discoRigido" Type="float" Nullable="false" />
+    <Property Name="delimitCpu" Type="float" />
+    <Property Name="delimitRam" Type="float" />
+    <Property Name="delimitHd" Type="float" />
+    <Property Name="idInstituicao" Type="int" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="idUsuario" />
+    </Key>
+    <Property Name="idUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nome" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="cpf" Type="varchar" MaxLength="14" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="login" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="senha" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="cargo" Type="varchar" MaxLength="13" />
+    <Property Name="ativo" Type="bit" />
+  </EntityType>
+  <Association Name="FK__Maquina__idInsti__5070F446">
+    <End Role="Instituicao" Type="Self.Instituicao" Multiplicity="0..1" />
+    <End Role="Maquina" Type="Self.Maquina" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Instituicao">
+        <PropertyRef Name="idInstituicao" />
+      </Principal>
+      <Dependent Role="Maquina">
+        <PropertyRef Name="idInstituicao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ModelosStoreContainer">
+    <EntitySet Name="Instituicao" EntityType="Self.Instituicao" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Maquina" EntityType="Self.Maquina" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Maquina__idInsti__5070F446" Association="Self.FK__Maquina__idInsti__5070F446">
+      <End Role="Instituicao" EntitySet="Instituicao" />
+      <End Role="Maquina" EntitySet="Maquina" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
