@@ -22,10 +22,12 @@ namespace SmartMonkey
         public string cpf { get; set; }
         [DisplayName("E-mail")]
         public string email { get; set; }
+        [DisplayName("Login")]
         public string login { get; set; }
+        [DisplayName("Senha")]
         public string senha { get; set; }
-        [DisplayName("Cargo")]
-        public string cargo { get; set; }
+        
+        public enum cargo { ADMINISTRADOR, MONITOR }
         [DisplayName("Ativo")]
         public Nullable<bool> ativo { get; set; }
     }

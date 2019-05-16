@@ -46,7 +46,7 @@ namespace SmartMonkey.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idUsuario,nome,cpf,email,login,senha,cargo,ativo")] Usuario usuario)
+        public ActionResult Create([Bind(Include = "nome,cpf,email,login,senha,cargo,ativo")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {

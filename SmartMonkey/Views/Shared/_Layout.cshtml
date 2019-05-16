@@ -24,9 +24,22 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Sobre", "About", "Home")</li>
                     <li>@Html.ActionLink("Contato", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Usuários", "Index", "Usuario")</li>
-                    <li>@Html.ActionLink("Máquinas", "Index", "Maquina")</li>
-                    <li>@Html.ActionLink("Instituições", "Index", "Instituicao")</li>
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Listas <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Lista de Usuários", "Index", "Usuario")</li>
+                            <li>@Html.ActionLink("Lista de Máquinas", "Index", "Maquina")</li>
+                            <li>@Html.ActionLink("Lista de Instituições", "Index", "Instituicao")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Cadastros <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Cadastro de Usuário", "Create", "Usuario")</li>
+                            <li>@Html.ActionLink("Cadastro de Máquina", "Create", "Maquina")</li>
+                            <li>@Html.ActionLink("Cadastro de Instituição", "Create", "Instituicao")</li>
+                        </ul>
+                    </li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
