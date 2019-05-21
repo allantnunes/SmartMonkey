@@ -20,8 +20,7 @@ namespace SmartMonkey
         {
             this.Maquina = new HashSet<Maquina>();
         }
-
-        [DisplayName("ID Instituição")]
+    
         public int idInstituicao { get; set; }
         [DisplayName("Razão Social")]
         public string razaoSocial { get; set; }

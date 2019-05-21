@@ -15,13 +15,12 @@ namespace SmartMonkey
 
     public partial class Maquina
     {
-        [DisplayName("ID Máquina")]
         public int idMaquina { get; set; }
         [DisplayName("Modelo")]
         public string modelo { get; set; }
         [DisplayName("Processador")]
         public string processador { get; set; }
-        [DisplayName("Memória RAM")]
+        [DisplayName("RAM")]
         public int memoriaRam { get; set; }
         [DisplayName("HD")]
         public double discoRigido { get; set; }
@@ -30,7 +29,7 @@ namespace SmartMonkey
         public Nullable<double> delimitHd { get; set; }
         [DisplayName("Instituição")]
         public Nullable<int> idInstituicao { get; set; }
-    
+        [DisplayName("Instituição")]
         public virtual Instituicao Instituicao { get; set; }
     }
 }

@@ -26,9 +26,11 @@ namespace SmartMonkey
         public string login { get; set; }
         [DisplayName("Senha")]
         public string senha { get; set; }
-        
-        public enum cargo { ADMINISTRADOR, MONITOR }
+        [DisplayName("Cargo")]
+        public Nullable<int> cargo { get; set; }
         [DisplayName("Ativo")]
         public Nullable<bool> ativo { get; set; }
+    
+        public virtual Cargo Cargo1 { get; set; }
     }
 }

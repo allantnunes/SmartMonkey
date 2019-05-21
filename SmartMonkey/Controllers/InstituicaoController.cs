@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -12,7 +13,7 @@ namespace SmartMonkey.Controllers
 {
     public class InstituicaoController : Controller
     {
-        private Entidades db = new Entidades();
+        private Entities db = new Entities();
 
         // GET: Instituicao
         public ActionResult Index()
@@ -46,7 +47,7 @@ namespace SmartMonkey.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idInstituicao,razaoSocial,nomeFantasia,cnpj")] Instituicao instituicao)
+        public ActionResult Create([Bind(Include = "razaoSocial,nomeFantasia,cnpj")] Instituicao instituicao)
         {
             if (ModelState.IsValid)
             {

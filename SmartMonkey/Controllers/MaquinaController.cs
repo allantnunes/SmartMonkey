@@ -12,7 +12,7 @@ namespace SmartMonkey.Controllers
 {
     public class MaquinaController : Controller
     {
-        private Entidades db = new Entidades();
+        private Entities db = new Entities();
 
         // GET: Maquina
         public ActionResult Index()
@@ -48,7 +48,7 @@ namespace SmartMonkey.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idMaquina,modelo,processador,memoriaRam,discoRigido,delimitCpu,delimitRam,delimitHd,idInstituicao")] Maquina maquina)
+        public ActionResult Create([Bind(Include = "modelo,processador,memoriaRam,discoRigido,delimitCpu,delimitRam,delimitHd,idInstituicao")] Maquina maquina)
         {
             if (ModelState.IsValid)
             {

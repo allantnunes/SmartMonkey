@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SmartMonkeyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cargo">
+          <Key>
+            <PropertyRef Name="IdCargo" />
+          </Key>
+          <Property Name="IdCargo" Type="int" Nullable="false" />
+          <Property Name="cargo" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Instituicao">
+          <Key>
+            <PropertyRef Name="idInstituicao" />
+          </Key>
+          <Property Name="idInstituicao" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="razaoSocial" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nomeFantasia" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="cnpj" Type="varchar" MaxLength="18" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Maquina">
+          <Key>
+            <PropertyRef Name="idMaquina" />
+          </Key>
+          <Property Name="idMaquina" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="modelo" Type="varchar" MaxLength="90" Nullable="false" />
+          <Property Name="processador" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="memoriaRam" Type="int" Nullable="false" />
+          <Property Name="discoRigido" Type="float" Nullable="false" />
+          <Property Name="delimitCpu" Type="float" />
+          <Property Name="delimitRam" Type="float" />
+          <Property Name="delimitHd" Type="float" />
+          <Property Name="idInstituicao" Type="int" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="cpf" Type="varchar" MaxLength="14" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="login" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="senha" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="cargo" Type="int" />
+          <Property Name="ativo" Type="bit" />
+        </EntityType>
+        <Association Name="FK__Maquina__idInsti__5070F446">
+          <End Role="Instituicao" Type="Self.Instituicao" Multiplicity="0..1" />
+          <End Role="Maquina" Type="Self.Maquina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instituicao">
+              <PropertyRef Name="idInstituicao" />
+            </Principal>
+            <Dependent Role="Maquina">
+              <PropertyRef Name="idInstituicao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuario__cargo__628FA481">
+          <End Role="Cargo" Type="Self.Cargo" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargo">
+              <PropertyRef Name="IdCargo" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="cargo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SmartMonkeyModelStoreContainer">
+          <EntitySet Name="Cargo" EntityType="Self.Cargo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Instituicao" EntityType="Self.Instituicao" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Maquina" EntityType="Self.Maquina" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Maquina__idInsti__5070F446" Association="Self.FK__Maquina__idInsti__5070F446">
+            <End Role="Instituicao" EntitySet="Instituicao" />
+            <End Role="Maquina" EntitySet="Maquina" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuario__cargo__628FA481" Association="Self.FK__Usuario__cargo__628FA481">
+            <End Role="Cargo" EntitySet="Cargo" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SmartMonkeyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cargo">
+          <Key>
+            <PropertyRef Name="IdCargo" />
+          </Key>
+          <Property Name="IdCargo" Type="Int32" Nullable="false" />
+          <Property Name="cargo1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK__Usuario__cargo__628FA481" FromRole="Cargo" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Instituicao">
+          <Key>
+            <PropertyRef Name="idInstituicao" />
+          </Key>
+          <Property Name="idInstituicao" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="razaoSocial" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nomeFantasia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cnpj" Type="String" MaxLength="18" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Maquina" Relationship="Self.FK__Maquina__idInsti__5070F446" FromRole="Instituicao" ToRole="Maquina" />
+        </EntityType>
+        <EntityType Name="Maquina">
+          <Key>
+            <PropertyRef Name="idMaquina" />
+          </Key>
+          <Property Name="idMaquina" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="modelo" Type="String" MaxLength="90" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="processador" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="memoriaRam" Type="Int32" Nullable="false" />
+          <Property Name="discoRigido" Type="Double" Nullable="false" />
+          <Property Name="delimitCpu" Type="Double" />
+          <Property Name="delimitRam" Type="Double" />
+          <Property Name="delimitHd" Type="Double" />
+          <Property Name="idInstituicao" Type="Int32" />
+          <NavigationProperty Name="Instituicao" Relationship="Self.FK__Maquina__idInsti__5070F446" FromRole="Maquina" ToRole="Instituicao" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cpf" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="senha" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cargo" Type="Int32" />
+          <Property Name="ativo" Type="Boolean" />
+          <NavigationProperty Name="Cargo1" Relationship="Self.FK__Usuario__cargo__628FA481" FromRole="Usuario" ToRole="Cargo" />
+        </EntityType>
+        <Association Name="FK__Usuario__cargo__628FA481">
+          <End Role="Cargo" Type="Self.Cargo" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargo">
+              <PropertyRef Name="IdCargo" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="cargo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Maquina__idInsti__5070F446">
+          <End Role="Instituicao" Type="Self.Instituicao" Multiplicity="0..1" />
+          <End Role="Maquina" Type="Self.Maquina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instituicao">
+              <PropertyRef Name="idInstituicao" />
+            </Principal>
+            <Dependent Role="Maquina">
+              <PropertyRef Name="idInstituicao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cargo" EntityType="Self.Cargo" />
+          <EntitySet Name="Instituicao" EntityType="Self.Instituicao" />
+          <EntitySet Name="Maquina" EntityType="Self.Maquina" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <AssociationSet Name="FK__Usuario__cargo__628FA481" Association="Self.FK__Usuario__cargo__628FA481">
+            <End Role="Cargo" EntitySet="Cargo" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Maquina__idInsti__5070F446" Association="Self.FK__Maquina__idInsti__5070F446">
+            <End Role="Instituicao" EntitySet="Instituicao" />
+            <End Role="Maquina" EntitySet="Maquina" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SmartMonkeyModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Cargo">
+            <EntityTypeMapping TypeName="SmartMonkeyModel.Cargo">
+              <MappingFragment StoreEntitySet="Cargo">
+                <ScalarProperty Name="IdCargo" ColumnName="IdCargo" />
+                <ScalarProperty Name="cargo1" ColumnName="cargo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Instituicao">
+            <EntityTypeMapping TypeName="SmartMonkeyModel.Instituicao">
+              <MappingFragment StoreEntitySet="Instituicao">
+                <ScalarProperty Name="idInstituicao" ColumnName="idInstituicao" />
+                <ScalarProperty Name="razaoSocial" ColumnName="razaoSocial" />
+                <ScalarProperty Name="nomeFantasia" ColumnName="nomeFantasia" />
+                <ScalarProperty Name="cnpj" ColumnName="cnpj" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Maquina">
+            <EntityTypeMapping TypeName="SmartMonkeyModel.Maquina">
+              <MappingFragment StoreEntitySet="Maquina">
+                <ScalarProperty Name="idMaquina" ColumnName="idMaquina" />
+                <ScalarProperty Name="modelo" ColumnName="modelo" />
+                <ScalarProperty Name="processador" ColumnName="processador" />
+                <ScalarProperty Name="memoriaRam" ColumnName="memoriaRam" />
+                <ScalarProperty Name="discoRigido" ColumnName="discoRigido" />
+                <ScalarProperty Name="delimitCpu" ColumnName="delimitCpu" />
+                <ScalarProperty Name="delimitRam" ColumnName="delimitRam" />
+                <ScalarProperty Name="delimitHd" ColumnName="delimitHd" />
+                <ScalarProperty Name="idInstituicao" ColumnName="idInstituicao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="SmartMonkeyModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="cpf" ColumnName="cpf" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="senha" ColumnName="senha" />
+                <ScalarProperty Name="cargo" ColumnName="cargo" />
+                <ScalarProperty Name="ativo" ColumnName="ativo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
