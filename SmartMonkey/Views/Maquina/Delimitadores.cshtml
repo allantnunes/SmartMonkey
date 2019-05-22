@@ -29,7 +29,9 @@
         <div class="form-group">
             <label class="control-label col-md-2">Máquina</label>
             <div class="col-md-10">
+
                 <select id="idMaquina" class="form-control" onchange="buscarDelimitadoresPorMaquina()"></select>
+                @Html.TextBoxFor(model => model.idMaquina, htmlAttributes: new { @class = "hidden", @id = "idMaquinaHidden" })
                 @Html.ValidationMessageFor(model => model.idMaquina, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -58,6 +60,8 @@
             </div>
         </div>
 
+        
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Salvar" class="btn btn-default" />
@@ -65,10 +69,6 @@
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
@@ -102,20 +102,29 @@
 <script>
     function buscarDelimitadoresPorMaquina() {
         // TODO
-        var idMaquina = document.getElementById("idMaquina").selectedIndex;
+        var idMaquina = document.getElementById("idMaquina").selectedIndex; 
+        document.getElementById("idMaquinaHidden").value = idMaquina;
         alert(idMaquina);
-        var url = "/Maquina/buscarMaquinaPorIntituicao/";
+        var url = "/Maquina/buscarDelimitadoresPorMaquina/";
         $.ajax({
             url: url,
             data: { idMaquina: idMaquina },
             cache: false,
             type: "POST",
             success: function (data) {
-                $("#delimitCpu").text(data[0].Value);
-                $("#delimitRam").text(data[1].Value);
-                $("#delimitHd").text(data[2].Value);
+
+                if (jQuery.isEmptyObject(data)) {
+                    document.getElementById("delimitCpu").value = null;
+                    document.getElementById("delimitRam").value = null;
+                    document.getElementById("delimitHd").value = null;
+                } else {
+                    document.getElementById("delimitCpu").value = data[0];
+                    document.getElementById("delimitRam").value = data[1];
+                    document.getElementById("delimitHd").value = data[2];
+                }
             },
             error: function (reponse) {
+
                 alert("error : " + reponse);
             }
         });

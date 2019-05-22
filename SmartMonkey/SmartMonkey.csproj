@@ -305,6 +305,7 @@
     <Content Include="Views\Instituicao\Edit.cshtml" />
     <Content Include="Views\Instituicao\Index.cshtml" />
     <Content Include="Views\Maquina\Delimitadores.cshtml" />
+    <Content Include="Views\Dashboard\Dashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

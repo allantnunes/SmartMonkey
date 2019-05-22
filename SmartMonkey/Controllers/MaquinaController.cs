@@ -148,27 +148,73 @@ namespace SmartMonkey.Controllers
         [HttpPost]
         public ActionResult buscarDelimitadoresPorMaquina(int idMaquina)
         {
+            System.Diagnostics.Debug.WriteLine(idMaquina);
             List<double> delimitadores = new List<double>();
             Maquina maquina = new Maquina();
-            maquina = (Maquina)db.Maquina.Where(m => m.idMaquina == idMaquina);
-            delimitadores.Add(maquina.delimitCpu.Value);
-            delimitadores.Add(maquina.delimitRam.Value);
-            delimitadores.Add(maquina.delimitHd.Value);
+            maquina = db.Maquina.Find(idMaquina);
+            if(maquina.delimitCpu != null && maquina.delimitRam != null && maquina.delimitHd != null)
+            {
+                delimitadores.Add(maquina.delimitCpu.Value);
+                delimitadores.Add(maquina.delimitRam.Value);
+                delimitadores.Add(maquina.delimitHd.Value);
+
+                System.Diagnostics.Debug.WriteLine("AOOOO COWBOY DE ESTRADA");
+                System.Diagnostics.Debug.WriteLine("ID MAQUINA = " + maquina.idMaquina);
+                System.Diagnostics.Debug.WriteLine("CPU: " + maquina.delimitCpu + " / HD: " + maquina.delimitHd + " / RAM: " + maquina.delimitRam);
+
+            }
 
             return Json(delimitadores);
 
         }
 
+        [HttpPost]
         public ActionResult salvarDelimitadores([Bind(Include = "idMaquina, delimitCpu, delimitRam, delimitHd")]Maquina maquina)
         {
-            if (ModelState.IsValid)
+            Maquina maquinaEditada = db.Maquina
+                .Where(w => w.idMaquina == maquina.idMaquina)
+                .SingleOrDefault();
+            System.Diagnostics.Debug.WriteLine("ID MAQUINA = " + maquina.idMaquina);
+
+            if (maquinaEditada != null)
             {
-                db.Entry(maquina).State = EntityState.Modified;
-                db.SaveChanges();
+                System.Diagnostics.Debug.WriteLine("máquinaEditada não é nulo ---------");
+
+                System.Diagnostics.Debug.WriteLine("CPU: "+maquina.delimitCpu+" / HD: "+maquina.delimitHd+" / RAM: "+maquina.delimitRam);
+                maquinaEditada.delimitCpu = maquina.delimitCpu;
+                maquinaEditada.delimitHd = maquina.delimitHd;
+                maquinaEditada.delimitRam = maquina.delimitRam;
+
+                if (ModelState.IsValid)
+                {
+                    db.Entry(maquinaEditada).State = EntityState.Modified;
+                    try
+                    {
+                        db.SaveChanges();
+                    }
+                    catch (System.Data.Entity.Validation.DbEntityValidationException e)
+                    {
+                        foreach (var eve in e.EntityValidationErrors)
+                        {
+                            System.Diagnostics.Debug.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                                eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                            foreach (var ve in eve.ValidationErrors)
+                            {
+                                System.Diagnostics.Debug.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                                    ve.PropertyName, ve.ErrorMessage);
+                            }
+                        }
+
+                    }
+                }
                 return RedirectToAction("Index");
             }
-            return View(maquina);
+            return RedirectToAction("Index");
         }
+
+    }
+
+                
     }
         
-}
+
