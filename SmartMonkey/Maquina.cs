@@ -12,6 +12,7 @@ namespace SmartMonkey
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class Maquina
     {
@@ -24,8 +25,11 @@ namespace SmartMonkey
         public int memoriaRam { get; set; }
         [DisplayName("HD")]
         public double discoRigido { get; set; }
+        [DisplayName("Delimitador CPU")]
         public Nullable<double> delimitCpu { get; set; }
+        [DisplayName("Delimitador RAM")]
         public Nullable<double> delimitRam { get; set; }
+        [DisplayName("Delimitador HD")]
         public Nullable<double> delimitHd { get; set; }
         [DisplayName("Instituição")]
         public Nullable<int> idInstituicao { get; set; }

@@ -1,0 +1,123 @@
+﻿@model SmartMonkey.Maquina
+
+@{
+    ViewBag.Title = "Delimitadores";
+}
+
+@using (Html.BeginForm("salvarDelimitadores", "Maquina", FormMethod.Post)) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h2>Configurar Máquinas</h2>
+        <p>
+            Configure os delimitadores das máquinas para ser alertado caso
+            ultrapassem os limites indicados.
+        </p>
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Instituição</label>
+            <div class="col-md-10">
+                @Html.DropDownList("idInstituicao", (SelectList)ViewBag.listaInstituicao, "-- Selecione a Instituição --", htmlAttributes: new { @class = "form-control", @onchange = "javascript:buscarMaquinaPorInstituicao(this.value);" })
+                @Html.ValidationMessageFor(model => model.idInstituicao, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Máquina</label>
+            <div class="col-md-10">
+                <select id="idMaquina" class="form-control" onchange="buscarDelimitadoresPorMaquina()"></select>
+                @Html.ValidationMessageFor(model => model.idMaquina, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.delimitCpu, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.delimitCpu, new { htmlAttributes = new { @class = "form-control", type = "number", max = 100, min = 0 } })
+                @Html.ValidationMessageFor(model => model.delimitCpu, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.delimitRam, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.delimitRam, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.delimitRam, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.delimitHd, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.delimitHd, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.delimitHd, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Salvar" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script language="javascript" type="text/javascript">
+    function buscarMaquinaPorInstituicao(idInstituicao) {
+        var optionsCriados = "<option value='0'> Carregando...</option>";
+        $("#idMaquina").html(optionsCriados).show();
+        var url = "/Maquina/buscarMaquinaPorInstituicao/";
+
+        $.ajax({
+            url: url,
+            data: { idInstituicao: idInstituicao },
+            cache: false,
+            type: "POST",
+            success: function (data) {
+                var placeHolderMaquinas = "<option selected disabled>-- Selecione a Máquina --</option>";
+                for (var x = 0; x < data.length; x++) {
+                    placeHolderMaquinas += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                }
+                $("#idMaquina").html(placeHolderMaquinas).show();
+            },
+            error: function (reponse) {
+                alert("error : " + reponse);
+            }
+        });
+
+        }
+</script>
+<script>
+    function buscarDelimitadoresPorMaquina() {
+        // TODO
+        var idMaquina = document.getElementById("idMaquina").selectedIndex;
+        alert(idMaquina);
+        var url = "/Maquina/buscarMaquinaPorIntituicao/";
+        $.ajax({
+            url: url,
+            data: { idMaquina: idMaquina },
+            cache: false,
+            type: "POST",
+            success: function (data) {
+                $("#delimitCpu").text(data[0].Value);
+                $("#delimitRam").text(data[1].Value);
+                $("#delimitHd").text(data[2].Value);
+            },
+            error: function (reponse) {
+                alert("error : " + reponse);
+            }
+        });
+    }
+</script>

@@ -39,7 +39,7 @@ namespace SmartMonkey.Controllers
         // GET: Maquina/Create
         public ActionResult Create()
         {
-            ViewBag.idInstituicao = new SelectList(db.Instituicao, "idInstituicao", "razaoSocial");
+            ViewBag.idInstituicao = new SelectList(db.Instituicao, "idInstituicao", "nomeFantasia");
             return View();
         }
 
@@ -48,7 +48,7 @@ namespace SmartMonkey.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "modelo,processador,memoriaRam,discoRigido,delimitCpu,delimitRam,delimitHd,idInstituicao")] Maquina maquina)
+        public ActionResult Create([Bind(Include = "modelo,processador,memoriaRam,discoRigido,idInstituicao")] Maquina maquina)
         {
             if (ModelState.IsValid)
             {
@@ -128,5 +128,47 @@ namespace SmartMonkey.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult Delimitadores()
+        {
+            ViewBag.listaInstituicao = new SelectList(db.Instituicao.ToList(), "idInstituicao", "nomeFantasia");
+            ViewBag.listaMaquina = new SelectList(db.Maquina.ToList(),"idMaquina","modelo");
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult buscarMaquinaPorInstituicao(int idInstituicao)
+        {
+            List<Maquina> maquinas = new List<Maquina>();
+            maquinas = db.Maquina.Where(m => m.idInstituicao == idInstituicao).ToList();
+            SelectList maquina = new SelectList(maquinas, "idMaquina", "modelo");
+            return Json(maquina);
+        }
+
+        [HttpPost]
+        public ActionResult buscarDelimitadoresPorMaquina(int idMaquina)
+        {
+            List<double> delimitadores = new List<double>();
+            Maquina maquina = new Maquina();
+            maquina = (Maquina)db.Maquina.Where(m => m.idMaquina == idMaquina);
+            delimitadores.Add(maquina.delimitCpu.Value);
+            delimitadores.Add(maquina.delimitRam.Value);
+            delimitadores.Add(maquina.delimitHd.Value);
+
+            return Json(delimitadores);
+
+        }
+
+        public ActionResult salvarDelimitadores([Bind(Include = "idMaquina, delimitCpu, delimitRam, delimitHd")]Maquina maquina)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(maquina).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(maquina);
+        }
     }
+        
 }
